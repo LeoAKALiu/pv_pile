@@ -1,0 +1,95 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Training results and logs
+runs/
+*.log
+training*.log
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# Data directories (too large for git)
+data/processed/
+data/raw/
+data/visualizations/
+DatasetId_853_1766643148/
+dataset.zip
+
+# Model weights (too large)
+weights/
+*.pt
+*.pth
+yolo*.pt
+yolov*.pt
+
+# Output directories
+outputs/
+results/
+predictions/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Conda
+.conda/
+
+# Ultralytics (embedded repository, should be ignored)
+ultralytics/
+
+# Large files
+*.zip
+*.tar.gz
+*.rar
+
+# Inference results (can be regenerated)
+runs/detect/predict/
+runs/detect/test_inference*/
+runs/detect/train*/
+
+# Training configs with sensitive paths
+training_config.yaml
+
