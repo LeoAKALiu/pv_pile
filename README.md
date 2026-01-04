@@ -27,6 +27,32 @@
 
 ## 🚀 快速开始
 
+### 🍎 Mac 用户快速开始
+
+**推荐使用 Docker 方式**（最简单）：
+
+```bash
+# 1. 克隆项目
+git clone https://github.com/LeoAKALiu/pv_pile.git
+cd pv_pile
+
+# 2. 运行设置脚本
+./setup_mac.sh
+
+# 3. 传输模型文件（从服务器）
+scp user@server:/root/pv_pile/runs/detect/train4/weights/best.pt \
+    runs/detect/train4/weights/
+
+# 4. 运行推理
+./run_inference_mac.sh input/your_image.jpg
+```
+
+详细说明请参考 [MAC_DEPLOYMENT_GUIDE.md](MAC_DEPLOYMENT_GUIDE.md)
+
+---
+
+### Linux 服务器环境
+
 ### 1. 环境准备
 
 ```bash
@@ -108,9 +134,10 @@ pv_pile/
 
 - **[AGENTS.md](AGENTS.md)**: 项目开发指南和规范
 - **[QUICKSTART.md](QUICKSTART.md)**: 快速开始指南
+- **[MAC_DEPLOYMENT_GUIDE.md](MAC_DEPLOYMENT_GUIDE.md)**: 🍎 Mac 部署指南（Docker 和直接安装）
+- **[DOCKER_GUIDE.md](DOCKER_GUIDE.md)**: Docker 使用指南
+- **[CPU_INFERENCE_TEST_REPORT.md](CPU_INFERENCE_TEST_REPORT.md)**: CPU 推理测试报告
 - **[EXPERIMENTS_SUMMARY.md](EXPERIMENTS_SUMMARY.md)**: 所有训练实验总结
-- **[SAHI_INFERENCE_TEST_REPORT.md](SAHI_INFERENCE_TEST_REPORT.md)**: SAHI 推理测试报告
-- **[SAHI_RESOLUTION_AND_VISUALIZATION.md](SAHI_RESOLUTION_AND_VISUALIZATION.md)**: 分辨率限制和可视化说明
 
 ## 🔧 主要功能
 
