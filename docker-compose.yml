@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  pv_pile:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pv_pile:latest
+    container_name: pv_pile_detection
+    volumes:
+      # Mount data directory
+      - ./data:/app/data
+      # Mount weights directory
+      - ./weights:/app/weights
+      # Mount runs directory for outputs
+      - ./runs:/app/runs
+      # Mount input images (optional)
+      - ./input:/app/input
+      # Mount output directory (optional)
+      - ./output:/app/output
+    environment:
+      - PYTHONPATH=/app
+      - CUDA_VISIBLE_DEVICES=  # Empty for CPU mode
+    # For GPU support (uncomment if using GPU)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+    # environment:
+    #   - NVIDIA_VISIBLE_DEVICES=all
+    stdin_open: true
+    tty: true
+    # Default command (override when running)
+    command: /bin/bash
+

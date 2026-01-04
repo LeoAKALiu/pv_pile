@@ -56,9 +56,19 @@ def load_model(weights_path: str, device: str = "0", confidence_threshold: float
     print(f"Device: {device}, Confidence threshold: {confidence_threshold}")
 
     # 转换设备格式（SAHI 需要 'cuda:0' 格式）
+    # 自动检测：如果没有指定或指定为数字，检查 CUDA 是否可用
     if device.isdigit():
-        device_str = f"cuda:{device}"
-    elif device == "cpu":
+        # 检查 CUDA 是否可用
+        try:
+            import torch
+            if torch.cuda.is_available():
+                device_str = f"cuda:{device}"
+            else:
+                print("⚠️  CUDA not available, falling back to CPU")
+                device_str = "cpu"
+        except ImportError:
+            device_str = "cpu"
+    elif device.lower() == "cpu":
         device_str = "cpu"
     else:
         device_str = device
@@ -415,8 +425,8 @@ def main() -> None:
     parser.add_argument(
         "--device",
         type=str,
-        default="0",
-        help="Device to use ('0', 'cpu', etc.)",
+        default="cpu",
+        help="Device to use ('0', 'cpu', etc.). Default: 'cpu' for CPU inference",
     )
 
     # 其他参数

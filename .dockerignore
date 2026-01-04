@@ -1,0 +1,72 @@
+# Git
+.git
+.gitignore
+.github
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# Training outputs (large files)
+runs/detect/train*/
+runs/detect/pv_pile_*/
+runs/detect/test_*/
+runs/detect/sahi_test_*/
+
+# Data (will be mounted as volume)
+data/processed/images/
+data/processed/labels/
+data/raw/
+*.zip
+
+# Model weights (will be mounted or downloaded)
+weights/*.pt
+runs/detect/*/weights/*.pt
+
+# Logs
+*.log
+training*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Documentation (optional, can be included)
+docs/
+
+# Ultralytics (if cloned, will be installed via pip)
+ultralytics/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
