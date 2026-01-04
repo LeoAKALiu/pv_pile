@@ -27,9 +27,37 @@
 
 ## 🚀 快速开始
 
-### 🍎 Mac 用户快速开始
+### 🐳 Docker 部署（推荐，最简单）
 
-**推荐使用 Docker 方式**（最简单）：
+**适用于所有平台（Mac/Linux/Windows）**：
+
+```bash
+# 1. 克隆项目
+git clone https://github.com/LeoAKALiu/pv_pile.git
+cd pv_pile
+
+# 2. 一键部署
+./docker_start.sh setup
+
+# 3. 准备模型文件（从服务器传输或本地已有）
+mkdir -p runs/detect/train4/weights
+# scp user@server:/path/to/best.pt runs/detect/train4/weights/
+
+# 4. 准备输入图像
+mkdir -p input
+# cp your_images/*.jpg input/
+
+# 5. 运行推理
+./docker_start.sh inference
+```
+
+详细说明请参考 [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md)
+
+---
+
+### 🍎 Mac 用户快速开始（直接安装）
+
+**不使用 Docker 的方式**：
 
 ```bash
 # 1. 克隆项目
@@ -132,12 +160,14 @@ pv_pile/
 
 ## 📚 文档
 
-- **[AGENTS.md](AGENTS.md)**: 项目开发指南和规范
-- **[QUICKSTART.md](QUICKSTART.md)**: 快速开始指南
-- **[MAC_DEPLOYMENT_GUIDE.md](MAC_DEPLOYMENT_GUIDE.md)**: 🍎 Mac 部署指南（Docker 和直接安装）
-- **[DOCKER_GUIDE.md](DOCKER_GUIDE.md)**: Docker 使用指南
+- **[DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md)**: 🐳 Docker 部署指南（推荐）
+- **[DOCKER_GUIDE.md](DOCKER_GUIDE.md)**: Docker 详细使用指南
+- **[QUICK_DOCKER_START.md](QUICK_DOCKER_START.md)**: Docker 快速开始
+- **[MAC_DEPLOYMENT_GUIDE.md](MAC_DEPLOYMENT_GUIDE.md)**: 🍎 Mac 部署指南（直接安装）
+- **[QUICKSTART.md](docs/QUICKSTART.md)**: 快速开始指南
+- **[AGENTS.md](docs/AGENTS.md)**: 项目开发指南和规范
 - **[CPU_INFERENCE_TEST_REPORT.md](CPU_INFERENCE_TEST_REPORT.md)**: CPU 推理测试报告
-- **[EXPERIMENTS_SUMMARY.md](EXPERIMENTS_SUMMARY.md)**: 所有训练实验总结
+- **[EXPERIMENTS_SUMMARY.md](docs/EXPERIMENTS_SUMMARY.md)**: 所有训练实验总结
 
 ## 🔧 主要功能
 

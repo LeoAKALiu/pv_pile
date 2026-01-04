@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     image: pv_pile:latest
     container_name: pv_pile_detection
+    restart: unless-stopped
     volumes:
       # Mount data directory
       - ./data:/app/data
@@ -21,7 +22,7 @@ services:
     environment:
       - PYTHONPATH=/app
       - CUDA_VISIBLE_DEVICES=  # Empty for CPU mode
-    # For GPU support (uncomment if using GPU)
+    # For GPU support (uncomment if using GPU on Linux with NVIDIA GPU)
     # deploy:
     #   resources:
     #     reservations:

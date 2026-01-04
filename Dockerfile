@@ -14,7 +14,11 @@ RUN apt-get update && apt-get install -y \
     libxext6 \
     libxrender-dev \
     libgomp1 \
+    git \
     && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip to latest version
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel
 
 # Copy requirements first for better caching
 COPY requirements.txt .
@@ -26,10 +30,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Create necessary directories
-RUN mkdir -p data/processed runs/detect weights
+RUN mkdir -p data/processed runs/detect weights input output
 
 # Set Python path to include project root
 ENV PYTHONPATH=/app:$PYTHONPATH
+
+# Set default working directory
+WORKDIR /app
 
 # Default command (can be overridden)
 CMD ["python", "--version"]
