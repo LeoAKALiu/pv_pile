@@ -218,7 +218,13 @@ main() {
             show_status
             ;;
         inference)
+            # 临时禁用 set -e 以优雅处理验证失败
+            set +e
             run_inference_example
+            inference_exit_code=$?
+            set -e
+            # 如果推理失败（验证检查失败或推理错误），返回相应的退出码
+            exit $inference_exit_code
             ;;
         setup)
             check_docker

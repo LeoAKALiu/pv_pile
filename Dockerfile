@@ -8,7 +8,7 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    libgl1-mesa-glx \
+    libgl1 \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
@@ -33,7 +33,7 @@ COPY . .
 RUN mkdir -p data/processed runs/detect weights input output
 
 # Set Python path to include project root
-ENV PYTHONPATH=/app:$PYTHONPATH
+ENV PYTHONPATH=/app
 
 # Set default working directory
 WORKDIR /app

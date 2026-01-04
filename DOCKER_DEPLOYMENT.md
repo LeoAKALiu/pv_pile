@@ -326,7 +326,82 @@ mkdir -p runs/detect/train4/weights
 # 然后复制模型文件到该目录
 ```
 
-### 问题 4: 容器启动失败
+### 问题 4: Docker 构建时网络超时
+
+**错误**: `DeadlineExceeded: failed to fetch oauth token` 或 `dial tcp: i/o timeout`
+
+**原因**: 无法连接到 Docker Hub 或网络连接不稳定（在中国大陆很常见）
+
+**解决方案**:
+
+#### 方案 1: 配置 Docker 镜像加速器（推荐，适用于中国大陆用户）
+
+**Mac (Docker Desktop)**:
+1. 打开 Docker Desktop
+2. 点击设置图标（⚙️）→ Settings
+3. 选择 Docker Engine
+4. 在 JSON 配置中添加镜像加速器：
+
+```json
+{
+  "registry-mirrors": [
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://hub-mirror.c.163.com",
+    "https://mirror.baidubce.com"
+  ]
+}
+```
+
+5. 点击 "Apply & Restart"
+6. 等待 Docker 重启完成
+
+**Linux**:
+编辑 `/etc/docker/daemon.json`（如果不存在则创建）：
+
+```json
+{
+  "registry-mirrors": [
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://hub-mirror.c.163.com",
+    "https://mirror.baidubce.com"
+  ]
+}
+```
+
+然后重启 Docker：
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+#### 方案 2: 重试构建
+
+网络问题可能是暂时的，可以重试：
+```bash
+# 重试构建
+docker build -t pv_pile:latest .
+
+# 或使用更长的超时时间
+docker build --network=host -t pv_pile:latest .
+```
+
+#### 方案 3: 检查网络连接
+
+```bash
+# 测试 Docker Hub 连接
+ping registry-1.docker.io
+
+# 检查 DNS
+nslookup registry-1.docker.io
+```
+
+#### 方案 4: 使用代理（如果有）
+
+如果使用代理，需要在 Docker Desktop 中配置代理：
+1. Docker Desktop → Settings → Resources → Proxies
+2. 配置代理设置
+
+### 问题 5: 容器启动失败
 
 **错误**: 容器无法启动
 
@@ -342,7 +417,7 @@ docker images | grep pv_pile
 docker build --no-cache -t pv_pile:latest .
 ```
 
-### 问题 5: 内存不足
+### 问题 6: 内存不足
 
 **错误**: `Out of memory`
 
@@ -352,7 +427,7 @@ docker build --no-cache -t pv_pile:latest .
 - 减少同时处理的图像数量
 - 增加 Docker 的内存限制（Docker Desktop → Settings → Resources）
 
-### 问题 6: 端口冲突
+### 问题 7: 端口冲突
 
 **错误**: `port is already allocated`
 
